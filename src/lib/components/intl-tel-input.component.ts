@@ -37,6 +37,9 @@ export class IntlTelInputComponent implements AfterViewInit {
     public cssClass: string;
 
     @Input()
+    public defaultValue: string;
+
+    @Input()
     public onlyLocalized: boolean;
 
     @Input()
@@ -57,6 +60,10 @@ export class IntlTelInputComponent implements AfterViewInit {
 
         if (this.onlyLocalized) {
             this.modifyCountryData();
+        }
+
+        if (this.defaultValue) {
+            this.setDefaultNumber(this.defaultValue);
         }
 
         const intlTelInputInstance = intlTelInput;
@@ -83,6 +90,10 @@ export class IntlTelInputComponent implements AfterViewInit {
         this._phoneNumber = value;
         this._intlTelInput.setNumber(value);
         this.i18nizePhoneNumber();
+    }
+
+    public setDefaultNumber(defaultValue: string): void {
+        this._intlTelInput.setNumber(defaultValue);
     }
 
     public i18nizePhoneNumber(): void {
